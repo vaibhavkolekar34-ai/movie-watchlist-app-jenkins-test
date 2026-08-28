@@ -40,7 +40,7 @@ pipeline {
                 sshagent(credentials: ['movie-watchlist-deploy']) {
                     sh '''
                         set -eu
-                        SSH_OPTS="-o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+                        SSH_OPTS="-o StrictHostKeyChecking=accept-new"
                         scp $SSH_OPTS target/movie-watchlist.jar "$TEST_SERVER_USER@$TEST_SERVER:/opt/movie-watchlist/movie-watchlist.jar"
                         ssh $SSH_OPTS "$TEST_SERVER_USER@$TEST_SERVER" "sudo systemctl restart movie-watchlist"
                     '''
@@ -56,7 +56,7 @@ pipeline {
                 sshagent(credentials: ['movie-watchlist-deploy']) {
                     sh '''
                         set -eu
-                        SSH_OPTS="-o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+                        SSH_OPTS="-o StrictHostKeyChecking=accept-new"
                         for attempt in 1 2 3 4 5 6; do
                             if ssh $SSH_OPTS "$TEST_SERVER_USER@$TEST_SERVER" "curl --fail --silent http://localhost:8081/movies > /dev/null"; then
                                 echo "Movie Watchlist health check passed."
