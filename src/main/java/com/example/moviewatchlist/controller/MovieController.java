@@ -44,4 +44,6 @@ public class MovieController {
     public Movie rateMovie(@PathVariable Long id, @RequestBody Map<String, Integer> request) {
         return movieService.rateMovie(id, request.get("rating"));
     }
+
+    //testing changes
 }
