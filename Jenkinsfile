@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'ENVIRONMENT', choices: ['TEST'], description: 'Deployment environment')
+        choice(name: 'ENVIRONMENT', choices: ['NONE', 'TEST'], description: 'Select NONE for CI-only, TEST to also deploy')
         string(name: 'TEST_SERVER', defaultValue: '', description: 'Private IP or DNS name of the test server')
         string(name: 'TEST_SERVER_USER', defaultValue: 'ec2-user', description: 'SSH user for EC2 #2')
     }
